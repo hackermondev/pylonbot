@@ -18,7 +18,7 @@ setup(
         "grpclib==0.3.1",
         "uvloop==0.14.0",
         # CLI Shell
-        "ipython==7.13.0",
+        "ipython==8.10.0",
     ],
     setup_requires=["pytest-runner"],
     tests_require=["pytest==5.4.1", "pytest-asyncio"],
