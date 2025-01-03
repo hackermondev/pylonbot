@@ -1,5 +1,5 @@
 wheel==0.34.2
-black==19.10b0
+black==24.3.0
 mypy==0.770
 grpcio-tools
 flake8==3.7.9
