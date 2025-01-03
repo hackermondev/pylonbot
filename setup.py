@@ -8,7 +8,7 @@ setup(
     zip_safe=False,
     install_requires=[
         "sanic",
-        "asyncpg==0.20.1",
+        "asyncpg==0.21.0",
         "oauthlib==3.1.0",
         "itsdangerous==1.1.0",
         "pyjwt==1.7.1",
