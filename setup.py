@@ -14,7 +14,7 @@ setup(
         "pyjwt==1.7.1",
         "pydantic==1.5.1",
         "simplejson==3.17.0",
-        "sentry-sdk==0.14.3",
+        "sentry-sdk==2.8.0",
         "grpclib==0.3.1",
         "uvloop==0.14.0",
         # CLI Shell
