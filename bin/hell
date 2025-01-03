@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+import IPython
+
+
+def main():
+    IPython.start_ipython(
+        exec_lines=[
+            "import asyncio",
+            "from pylon.server import app, setup, teardown",
+            "await setup(app, asyncio.get_running_loop())",
+        ]
+    )
+
+
+if __name__ == "__main__":
+    main()

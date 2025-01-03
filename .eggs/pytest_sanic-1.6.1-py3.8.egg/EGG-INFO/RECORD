@@ -1,0 +1,8 @@
+pytest_sanic/__init__.py,sha256=purtuLvskAhEdNLSjxoYqUibNFbOHk0IB5Wc4KCA7l4,22
+pytest_sanic/plugin.py,sha256=EfzHECqvSokGV0E7fyzZgVTABpQLTiyqnm3mqqgfwfU,6047
+pytest_sanic/utils.py,sha256=YnswvpAdUcg6GGPLat0qaT-fKeUe2ps37Ns1VjAf_EE,8700
+pytest_sanic-1.6.1.dist-info/entry_points.txt,sha256=J3seUQdjxKUMZMsj739KfHi5at6gDbSznOiCHfv83wQ,38
+pytest_sanic-1.6.1.dist-info/LICENSE,sha256=EfxO1XCs0rjBLHY8BMKY1LMs2U_4M2TnOQRiZY7-u7E,11336
+pytest_sanic-1.6.1.dist-info/WHEEL,sha256=V7iVckP-GYreevsTDnv1eAinQt_aArwnAxmnP0gygBY,83
+pytest_sanic-1.6.1.dist-info/METADATA,sha256=rAIIeL6uYLPvefHG6B-OuBM05WVmxmaijZGa5gAwYpE,11446
+pytest_sanic-1.6.1.dist-info/RECORD,,
