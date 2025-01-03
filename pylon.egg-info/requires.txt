@@ -3,7 +3,7 @@ asyncpg==0.20.1
 oauthlib==3.1.0
 itsdangerous==1.1.0
 pyjwt==1.7.1
-pydantic==1.5.1
+pydantic==1.10.13
 simplejson==3.17.0
 sentry-sdk==0.14.3
 grpclib==0.3.1
