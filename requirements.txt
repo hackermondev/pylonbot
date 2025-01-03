@@ -1,0 +1,6 @@
+wheel==0.34.2
+black==19.10b0
+mypy==0.770
+grpcio-tools
+flake8==3.7.9
+-e git://github.com/b1naryth1ef/python-betterproto.git@pylon#egg=betterproto[compiler]

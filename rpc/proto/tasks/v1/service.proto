@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package rpc.tasks.v1;
+option go_package = "up.lol/pylon/rpc/go/rpc/tasks";
+
+import "common/v1/common.proto";
+
+message CronTask {
+  string name = 1;
+  string cron_string = 2;
+}
+
+message DeploymentTasks {
+  rpc.common.v1.DeploymentKey deployment_key = 1;
+  repeated CronTask cron_tasks = 2;
+}
+
+message ValidateDeploymentTasksResult {
+  message Error {
+    string task_name = 1;
+    string error = 2;
+  }
+
+  repeated Error errors = 2;
+}
+
+service Tasks {
+  rpc ValidateDeploymentTasks(DeploymentTasks)
+      returns (ValidateDeploymentTasksResult);
+  rpc PublishDeploymentTasks(DeploymentTasks) returns (rpc.common.v1.Empty);
+}

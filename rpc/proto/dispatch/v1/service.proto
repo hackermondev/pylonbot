@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package rpc.dispatch.v1;
+option go_package = "up.lol/pylon/rpc/go/rpc/dispatch";
+
+import "common/v1/common.proto";
+
+message ScriptEvent {
+  string script_id = 1;
+
+  DiscordConfig discord_config = 2;
+
+  oneof payload {
+    DiscordEvent discord_event = 3;
+    TaskEvent task_event = 5;
+  }
+
+  rpc.common.v1.DeploymentKey deployment_key = 4;
+}
+
+message DiscordConfig {
+  string bot_id = 1;
+  string guild_id = 2;
+}
+
+message DiscordEvent {
+  string event_type = 1;
+  string event_payload = 2;
+  string previous_payload = 3;
+}
+
+message TaskEvent {
+  enum TaskType { CRON = 0; }
+  TaskType task_type = 1;
+  string task_name = 2;
+}
+
+message ScriptEventResponse {}
+
+message PingRequest {}
+
+message PingResponse { string hostname = 1; }
+
+service Dispatch {
+  rpc DispatchEvent(ScriptEvent) returns (ScriptEventResponse);
+  rpc Ping(PingRequest) returns (PingResponse);
+}

@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package rpc.quotas.v1;
+option go_package = "up.lol/pylon/rpc/go/rpc/quotas";
+
+message RuntimeEventsUsage {
+  int32 event_date = 1;
+
+  string bot_id = 2;
+  string guild_id = 3;
+
+  string script_id = 4;
+
+  string event_type = 5;
+  int32 event_payload_size = 6;
+
+  int32 usage_cpu_ms = 7;
+  int32 usage_execution_ms = 8;
+  int32 usage_host_function_calls = 9;
+
+  int32 usage_fetch_requests = 10;
+  int32 usage_kv_operations = 11;
+
+  int32 usage_discord_cache_requests = 12;
+  int32 usage_discord_api_requests = 13;
+}
+
+message UsageReport { RuntimeEventsUsage runtime_event_usage = 1; }
+
+message Empty {}
+
+message ManagedGuildUsageRequest {
+  int32 date_start = 1;
+  int32 date_end = 2;
+  int32 interval = 3;
+
+  uint64 bot_id = 4;
+  uint64 guild_id = 5;
+}
+
+message ManagedGuildUsageReport {
+
+  message Interval {
+    int32 date = 1;
+
+    uint32 cpu_ms = 2;
+    uint32 execution_ms = 3;
+    uint32 host_function_calls = 4;
+    uint32 fetch_requests = 5;
+    uint32 kv_operations = 6;
+    uint32 discord_cache_requests = 7;
+    uint32 discord_api_requests = 8;
+
+    uint32 events = 9;
+
+    float cpu_ms_avg = 10;
+    float execution_ms_avg = 11;
+  }
+
+  repeated Interval intervals = 1;
+}
+
+service Quotas {
+  rpc TrackUsage(UsageReport) returns (Empty);
+  rpc GetManagedGuildUsage(ManagedGuildUsageRequest)
+      returns (ManagedGuildUsageReport);
+}

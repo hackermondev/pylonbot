@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package rpc.common.v1;
+option go_package = "up.lol/pylon/rpc/go/rpc/common/v1";
+
+message Empty {}
+
+message DeploymentKey {
+  uint64 id = 1 [ jstype = JS_STRING ];
+  uint32 revision = 2;
+  uint64 bot_id = 3 [ jstype = JS_STRING ];
+  uint64 guild_id = 4 [ jstype = JS_STRING ];
+}

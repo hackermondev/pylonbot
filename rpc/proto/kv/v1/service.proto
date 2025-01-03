@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package rpc.kv.v1;
+option go_package = "up.lol/pylon/rpc/go/rpc/kv/v1";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service KV {
+  rpc ListNamespaces(ListNamespacesRequest) returns (ListNamespacesReply);
+
+  rpc CountGuild(CountGuildRequest) returns (CountGuildReply);
+  rpc Keys(KeysRequest) returns (KeysReply);
+  rpc Items(ItemsRequest) returns (ItemsReply);
+  rpc Count(CountRequest) returns (CountReply);
+  rpc Get(GetRequest) returns (GetReply);
+  rpc Put(PutRequest) returns (PutReply);
+  rpc Delete(DeleteRequest) returns (DeleteReply);
+  rpc Cas(CasRequest) returns (CasReply);
+  rpc Clear(ClearRequest) returns (ClearReply);
+}
+
+message Scope {
+  uint64 guild_id = 1 [ jstype = JS_STRING ];
+  string namespace = 2;
+}
+
+message Value {
+  google.protobuf.Timestamp expires_at = 1;
+  oneof value {
+    string string = 2;
+    bytes bytes = 3;
+  }
+}
+
+message ListNamespacesRequest { uint64 guild_id = 1; }
+message ListNamespacesReply {
+  message NamespaceMetadata {
+    string namespace = 1;
+    uint32 count = 2;
+  }
+
+  repeated NamespaceMetadata namespaces = 1;
+}
+
+message CountGuildRequest { uint64 guild_id = 1; }
+message CountGuildReply { uint32 count = 1; }
+
+message CountRequest { Scope scope = 1; }
+message CountReply { uint32 count = 1; }
+
+message KeysRequest {
+  Scope scope = 1;
+  google.protobuf.UInt32Value limit = 2;
+  string from = 3;
+}
+
+message KeysReply { repeated string keys = 1; }
+
+message ItemsRequest {
+  Scope scope = 1;
+  google.protobuf.UInt32Value limit = 2;
+  string from = 3;
+}
+
+message ItemsReply {
+  message Item {
+    string key = 1;
+    Value value = 2;
+  }
+
+  repeated Item items = 1;
+}
+
+message GetRequest {
+  Scope scope = 1;
+  string key = 2;
+}
+
+message GetReply { Value value = 1; }
+
+message PutRequest {
+  Scope scope = 1;
+  string key = 2;
+  Value value = 3;
+  bool if_not_exists = 4;
+}
+
+message PutReply {}
+
+message DeleteRequest {
+  Scope scope = 1;
+  string key = 2;
+  oneof value_equals {
+    string string = 3;
+    bytes bytes = 4;
+  }
+}
+
+message DeleteReply {}
+
+message CasTransaction {
+  string key = 1;
+  oneof compare {
+    string string = 2;
+    bytes bytes = 3;
+  }
+  Value set = 4;
+}
+
+message CasRequest {
+  Scope scope = 1;
+  repeated CasTransaction operations = 2;
+}
+
+message CasReply { CasTransaction failedOperation = 1; }
+
+message ClearRequest { Scope scope = 1; }
+
+message ClearReply { uint32 keys_deleted = 1; }

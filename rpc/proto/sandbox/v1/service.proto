@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package rpc.sandbox.v1;
+option go_package = "up.lol/pylon/rpc/go/rpc/sandbox";
+
+message Script {
+  string id = 1;
+  string contents = 2;
+  string bot_id = 3;
+  string guild_id = 4;
+}
+
+message CronTask {
+  string name = 1;
+  string cron_string = 2;
+}
+
+message Tasks { repeated CronTask cron_tasks = 1; }
+
+message ValidationResult {
+  bool success = 1;
+  string message = 2;
+
+  repeated string events = 3;
+  Tasks tasks = 4;
+}
+
+service Sandbox { rpc ValidateScript(Script) returns (ValidationResult); }

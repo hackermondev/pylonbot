@@ -1,0 +1,1 @@
+git+https://github.com/huge-success/sanic.git#egg=sanic
