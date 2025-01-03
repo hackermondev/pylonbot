@@ -36,6 +36,6 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=["protobuf==3.11.3"],
+    install_requires=["protobuf==3.18.3"],
     cmdclass={"build_proto": build_proto},
 )
